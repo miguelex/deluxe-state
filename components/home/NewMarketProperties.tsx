@@ -1,6 +1,17 @@
-import { Property } from "@/app/data/properties";
+import { Property } from "@/lib/getProperties";
+import Pagination from "@/components/ui/Pagination";
 
-export default function NewMarketProperties({ properties }: { properties: Property[] }) {
+interface NewMarketPropertiesProps {
+    properties: Property[];
+    currentPage: number;
+    totalPages: number;
+}
+
+export default function NewMarketProperties({
+    properties,
+    currentPage,
+    totalPages,
+}: NewMarketPropertiesProps) {
     return (
         <section>
             <div className="flex items-end justify-between mb-8">
@@ -14,6 +25,7 @@ export default function NewMarketProperties({ properties }: { properties: Proper
                     <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark">Rent</button>
                 </div>
             </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {properties.map((property, idx) => (
                     <article
@@ -23,9 +35,9 @@ export default function NewMarketProperties({ properties }: { properties: Proper
                     >
                         <div className="relative aspect-[4/3] overflow-hidden">
                             <img
-                                alt={property.imageAlt}
+                                alt={property.image_alt}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                src={property.imageUrl}
+                                src={property.image_url}
                             />
                             <button className="absolute top-3 right-3 p-2 bg-white/90 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark">
                                 <span className="material-icons text-lg">favorite_border</span>
@@ -41,14 +53,12 @@ export default function NewMarketProperties({ properties }: { properties: Proper
                             <div className="flex justify-between items-baseline mb-2">
                                 <h3 className="font-bold text-lg text-nordic-dark">
                                     ${property.price.toLocaleString()}
-                                    {property.priceSuffix && (
-                                        <span className="text-sm font-normal text-nordic-muted">{property.priceSuffix}</span>
+                                    {property.price_suffix && (
+                                        <span className="text-sm font-normal text-nordic-muted">{property.price_suffix}</span>
                                     )}
                                 </h3>
                             </div>
-                            <h4 className="text-nordic-dark font-medium truncate mb-1">
-                                {property.title}
-                            </h4>
+                            <h4 className="text-nordic-dark font-medium truncate mb-1">{property.title}</h4>
                             <p className="text-nordic-muted text-xs mb-4">{property.location}</p>
                             <div className="mt-auto flex items-center justify-between pt-3 border-t border-gray-100">
                                 <div className="flex items-center gap-1 text-nordic-muted text-xs">
@@ -65,11 +75,8 @@ export default function NewMarketProperties({ properties }: { properties: Proper
                     </article>
                 ))}
             </div>
-            <div className="mt-12 text-center">
-                <button className="px-8 py-3 bg-white border border-nordic-dark/10 hover:border-mosque hover:text-mosque text-nordic-dark font-medium rounded-lg transition-all hover:shadow-md">
-                    Load more properties
-                </button>
-            </div>
+
+            <Pagination currentPage={currentPage} totalPages={totalPages} />
         </section>
     );
 }
