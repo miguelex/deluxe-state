@@ -21,9 +21,7 @@ export default function Navbar() {
                         <a className="text-nordic-dark/70 hover:text-nordic-dark font-medium text-sm hover:border-b-2 hover:border-nordic-dark/20 px-1 py-1 transition-all" href="#">
                             Sell
                         </a>
-                        <a className="text-nordic-dark/70 hover:text-nordic-dark font-medium text-sm hover:border-b-2 hover:border-nordic-dark/20 px-1 py-1 transition-all" href="#">
-                            Saved Homes
-                        </a>
+
                     </div>
                     <div className="flex items-center space-x-6">
                         <button className="text-nordic-dark hover:text-mosque transition-colors">
@@ -50,7 +48,7 @@ export default function Navbar() {
                     <a className="block px-3 py-2 rounded-md text-base font-medium text-mosque bg-mosque/10" href="#">Buy</a>
                     <a className="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="#">Rent</a>
                     <a className="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="#">Sell</a>
-                    <a className="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="#">Saved Homes</a>
+
                 </div>
             </div>
         </nav>

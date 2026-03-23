@@ -31,16 +31,22 @@ export async function getFeaturedProperties(): Promise<Property[]> {
     const { data, error } = await supabase
         .from("properties")
         .select("*")
-        .eq("is_featured", true)
-        .order("created_at", { ascending: true });
+        .eq("is_featured", true);
 
     if (error) {
         console.error("Error fetching featured properties:", error.message);
         return [];
     }
 
-    return data ?? [];
+    const all = data ?? [];
+    // Fisher-Yates shuffle, then pick max 2
+    for (let i = all.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [all[i], all[j]] = [all[j], all[i]];
+    }
+    return all.slice(0, 2);
 }
+
 
 export async function getMarketProperties(
     page: number = 1,
