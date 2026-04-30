@@ -26,6 +26,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${inter.variable} antialiased bg-background-light text-nordic-dark font-display selection:bg-mosque selection:text-white`}
+        suppressHydrationWarning
       >
         <Navbar />
         {children}
