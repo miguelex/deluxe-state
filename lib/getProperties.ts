@@ -9,12 +9,16 @@ export interface Property {
     bedrooms: number;
     bathrooms: number;
     area: number;
-    image_url: string;
+    images: string[];
     image_alt: string;
     tags: string[];
     type: "SALE" | "RENT";
     is_featured: boolean;
     created_at: string;
+    slug: string;
+    description: string | null;
+    latitude: number;
+    longitude: number;
 }
 
 export interface PaginatedProperties {

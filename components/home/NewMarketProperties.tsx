@@ -1,4 +1,5 @@
 import { Property } from "@/lib/getProperties";
+import Link from "next/link";
 import Pagination from "@/components/ui/Pagination";
 
 interface NewMarketPropertiesProps {
@@ -28,16 +29,16 @@ export default function NewMarketProperties({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {properties.map((property, idx) => (
-                    <article
+                    <Link href={`/properties/${property.slug}`}
                         key={property.id}
-                        className={`bg-white rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col ${idx === 4 ? "hidden xl:flex" : idx === 5 ? "hidden lg:flex" : ""
+                        className={`bg-white rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer flex flex-col ${idx === 4 ? "hidden xl:flex" : idx === 5 ? "hidden lg:flex" : ""
                             }`}
                     >
                         <div className="relative aspect-[4/3] overflow-hidden">
                             <img
                                 alt={property.image_alt}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                src={property.image_url}
+                                src={property.images[0]}
                             />
                             <button className="absolute top-3 right-3 p-2 bg-white/90 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark">
                                 <span className="material-icons text-lg">favorite_border</span>
@@ -72,7 +73,7 @@ export default function NewMarketProperties({
                                 </div>
                             </div>
                         </div>
-                    </article>
+                    </Link>
                 ))}
             </div>
 
