@@ -30,15 +30,27 @@ export default async function Home({ searchParams }: HomePageProps) {
     amenities: params.amenities ? params.amenities.split(",") : undefined,
   };
 
+  const hasFilters = Boolean(
+    filters.location ||
+    filters.minPrice ||
+    filters.maxPrice ||
+    (filters.type && filters.type !== "Any Type" && filters.type !== "All") ||
+    filters.beds ||
+    filters.baths ||
+    (filters.amenities && filters.amenities.length > 0)
+  );
+
   const [featuredProperties, marketData] = await Promise.all([
-    getFeaturedProperties(),
+    hasFilters ? Promise.resolve([]) : getFeaturedProperties(),
     getMarketProperties(currentPage, PAGE_SIZE, filters),
   ]);
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
       <Hero />
-      <FeaturedCollections properties={featuredProperties} />
+      {!hasFilters && featuredProperties.length > 0 && (
+        <FeaturedCollections properties={featuredProperties} />
+      )}
       <NewMarketProperties
         properties={marketData.properties}
         currentPage={marketData.page}
