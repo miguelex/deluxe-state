@@ -52,19 +52,59 @@ export async function getFeaturedProperties(): Promise<Property[]> {
 }
 
 
+export interface PropertyFilters {
+    location?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    type?: string;
+    beds?: number;
+    baths?: number;
+    amenities?: string[];
+}
+
 export async function getMarketProperties(
     page: number = 1,
-    pageSize: number = PAGE_SIZE
+    pageSize: number = PAGE_SIZE,
+    filters?: PropertyFilters
 ): Promise<PaginatedProperties> {
     const from = (page - 1) * pageSize;
     const to = from + pageSize - 1;
 
-    const { data, error, count } = await supabase
+    let query = supabase
         .from("properties")
         .select("*", { count: "exact" })
         .eq("is_featured", false)
-        .order("created_at", { ascending: true })
-        .range(from, to);
+        .order("created_at", { ascending: false });
+
+    if (filters) {
+        if (filters.location) {
+            // ILIKE for case-insensitive search
+            query = query.ilike('location', `%${filters.location}%`);
+        }
+        if (filters.minPrice) {
+            query = query.gte('price', filters.minPrice);
+        }
+        if (filters.maxPrice) {
+            query = query.lte('price', filters.maxPrice);
+        }
+        if (filters.type && filters.type !== 'Any Type') {
+            // Map common terms to SALE/RENT if needed or filter by title
+            // But if type means SALE/RENT, our properties have type: 'SALE' or 'RENT'.
+            // Wait, the filter has "House", "Apartment", "Condo", "Townhouse". These are in the title!
+            query = query.ilike('title', `%${filters.type}%`);
+        }
+        if (filters.beds) {
+            query = query.gte('bedrooms', filters.beds);
+        }
+        if (filters.baths) {
+            query = query.gte('bathrooms', filters.baths);
+        }
+        if (filters.amenities && filters.amenities.length > 0) {
+            query = query.contains('tags', filters.amenities);
+        }
+    }
+
+    const { data, error, count } = await query.range(from, to);
 
     if (error) {
         console.error("Error fetching market properties:", error.message);
