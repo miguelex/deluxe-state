@@ -1,0 +1,97 @@
+{
+  "nav": {
+    "buy": "Acheter",
+    "rent": "Louer",
+    "sell": "Vendre"
+  },
+  "hero": {
+    "title_find": "Trouvez votre",
+    "title_sanctuary": "sanctuaire",
+    "search_placeholder": "Rechercher par ville, quartier ou adresse...",
+    "search_button": "Rechercher",
+    "filter_all": "Tous",
+    "filter_house": "Maison",
+    "filter_apartment": "Appartement",
+    "filter_villa": "Villa",
+    "filter_penthouse": "Penthouse",
+    "filters": "Filtres"
+  },
+  "featured": {
+    "title": "Collections en vedette",
+    "subtitle": "Des propriétés soigneusement sélectionnées.",
+    "view_all": "Voir tout",
+    "beds": "Chambres",
+    "baths": "Salles de bain"
+  },
+  "market": {
+    "title": "Nouveautés du marché",
+    "subtitle": "Nouvelles opportunités ajoutées cette semaine.",
+    "all": "Tous",
+    "buy": "Acheter",
+    "rent": "Louer",
+    "for_sale": "À VENDRE",
+    "for_rent": "À LOUER"
+  },
+  "modal": {
+    "title": "Filtres",
+    "location": "Localisation",
+    "location_placeholder": "Ville, quartier ou adresse",
+    "price_range": "Fourchette de prix",
+    "min_price": "Prix min",
+    "max_price": "Prix max",
+    "no_min": "Sans min",
+    "no_max": "Sans max",
+    "property_type": "Type de bien",
+    "any_type": "Tout type",
+    "house": "Maison",
+    "apartment": "Appartement",
+    "condo": "Condo",
+    "townhouse": "Maison de ville",
+    "villa": "Villa",
+    "penthouse": "Penthouse",
+    "bedrooms": "Chambres",
+    "bathrooms": "Salles de bain",
+    "any": "Indifférent",
+    "amenities": "Équipements & caractéristiques",
+    "swimming_pool": "Piscine",
+    "gym": "Salle de sport",
+    "parking": "Parking",
+    "air_conditioning": "Climatisation",
+    "wifi": "Wifi haut débit",
+    "patio": "Patio / Terrasse",
+    "clear_filters": "Effacer tous les filtres",
+    "apply_filters": "Appliquer les filtres"
+  },
+  "property": {
+    "features": "Caractéristiques",
+    "square_meters": "Mètres carrés",
+    "bedrooms": "Chambres",
+    "bathrooms": "Salles de bain",
+    "garage": "Garage",
+    "about": "À propos de ce logement",
+    "read_more": "Lire plus",
+    "view_photos": "Voir toutes les photos",
+    "premium": "Premium",
+    "amenities": "Équipements",
+    "top_agent": "Agent le mieux noté",
+    "schedule_visit": "Planifier une visite",
+    "contact_agent": "Contacter l'agent",
+    "estimated_payment": "Paiement estimé",
+    "starting_from": "À partir de",
+    "per_month": "/mois",
+    "with_down": "avec 20% d'apport",
+    "view_on_map": "Voir sur la carte",
+    "calculate_mortgage": "Calculer le prêt",
+    "not_found": "Propriété introuvable"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch"
+  },
+  "pagination": {
+    "previous": "Page précédente",
+    "next": "Page suivante"
+  }
+}

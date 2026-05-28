@@ -1,0 +1,97 @@
+{
+  "nav": {
+    "buy": "Comprar",
+    "rent": "Alquilar",
+    "sell": "Vender"
+  },
+  "hero": {
+    "title_find": "Encuentra tu",
+    "title_sanctuary": "santuario",
+    "search_placeholder": "Busca por ciudad, zona o dirección...",
+    "search_button": "Buscar",
+    "filter_all": "Todos",
+    "filter_house": "Casa",
+    "filter_apartment": "Apartamento",
+    "filter_villa": "Villa",
+    "filter_penthouse": "Ático",
+    "filters": "Filtros"
+  },
+  "featured": {
+    "title": "Colecciones destacadas",
+    "subtitle": "Propiedades curadas para el ojo exigente.",
+    "view_all": "Ver todo",
+    "beds": "Habitaciones",
+    "baths": "Baños"
+  },
+  "market": {
+    "title": "Nuevos en el mercado",
+    "subtitle": "Oportunidades recientes añadidas esta semana.",
+    "all": "Todos",
+    "buy": "Comprar",
+    "rent": "Alquilar",
+    "for_sale": "EN VENTA",
+    "for_rent": "EN ALQUILER"
+  },
+  "modal": {
+    "title": "Filtros",
+    "location": "Ubicación",
+    "location_placeholder": "Ciudad, zona o dirección",
+    "price_range": "Rango de precio",
+    "min_price": "Precio mín.",
+    "max_price": "Precio máx.",
+    "no_min": "Sin mín.",
+    "no_max": "Sin máx.",
+    "property_type": "Tipo de propiedad",
+    "any_type": "Cualquier tipo",
+    "house": "Casa",
+    "apartment": "Apartamento",
+    "condo": "Condo",
+    "townhouse": "Adosado",
+    "villa": "Villa",
+    "penthouse": "Ático",
+    "bedrooms": "Habitaciones",
+    "bathrooms": "Baños",
+    "any": "Cualquiera",
+    "amenities": "Comodidades y características",
+    "swimming_pool": "Piscina",
+    "gym": "Gimnasio",
+    "parking": "Aparcamiento",
+    "air_conditioning": "Aire acondicionado",
+    "wifi": "Wifi de alta velocidad",
+    "patio": "Patio / Terraza",
+    "clear_filters": "Borrar todos los filtros",
+    "apply_filters": "Aplicar filtros"
+  },
+  "property": {
+    "features": "Características de la propiedad",
+    "square_meters": "Metros cuadrados",
+    "bedrooms": "Habitaciones",
+    "bathrooms": "Baños",
+    "garage": "Garaje",
+    "about": "Sobre esta propiedad",
+    "read_more": "Leer más",
+    "view_photos": "Ver todas las fotos",
+    "premium": "Premium",
+    "amenities": "Comodidades",
+    "top_agent": "Agente mejor valorado",
+    "schedule_visit": "Programar visita",
+    "contact_agent": "Contactar agente",
+    "estimated_payment": "Pago estimado",
+    "starting_from": "Desde",
+    "per_month": "/mes",
+    "with_down": "con 20% de entrada",
+    "view_on_map": "Ver en mapa",
+    "calculate_mortgage": "Calcular hipoteca",
+    "not_found": "Propiedad no encontrada"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch"
+  },
+  "pagination": {
+    "previous": "Página anterior",
+    "next": "Página siguiente"
+  }
+}

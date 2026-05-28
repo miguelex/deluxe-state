@@ -1,0 +1,97 @@
+{
+  "nav": {
+    "buy": "Buy",
+    "rent": "Rent",
+    "sell": "Sell"
+  },
+  "hero": {
+    "title_find": "Find your",
+    "title_sanctuary": "sanctuary",
+    "search_placeholder": "Search by city, neighborhood, or address...",
+    "search_button": "Search",
+    "filter_all": "All",
+    "filter_house": "House",
+    "filter_apartment": "Apartment",
+    "filter_villa": "Villa",
+    "filter_penthouse": "Penthouse",
+    "filters": "Filters"
+  },
+  "featured": {
+    "title": "Featured Collections",
+    "subtitle": "Curated properties for the discerning eye.",
+    "view_all": "View all",
+    "beds": "Beds",
+    "baths": "Baths"
+  },
+  "market": {
+    "title": "New in Market",
+    "subtitle": "Fresh opportunities added this week.",
+    "all": "All",
+    "buy": "Buy",
+    "rent": "Rent",
+    "for_sale": "FOR SALE",
+    "for_rent": "FOR RENT"
+  },
+  "modal": {
+    "title": "Filters",
+    "location": "Location",
+    "location_placeholder": "City, neighborhood, or address",
+    "price_range": "Price Range",
+    "min_price": "Min Price",
+    "max_price": "Max Price",
+    "no_min": "No Min",
+    "no_max": "No Max",
+    "property_type": "Property Type",
+    "any_type": "Any Type",
+    "house": "House",
+    "apartment": "Apartment",
+    "condo": "Condo",
+    "townhouse": "Townhouse",
+    "villa": "Villa",
+    "penthouse": "Penthouse",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "any": "Any",
+    "amenities": "Amenities & Features",
+    "swimming_pool": "Swimming Pool",
+    "gym": "Gym",
+    "parking": "Parking",
+    "air_conditioning": "Air Conditioning",
+    "wifi": "High-speed Wifi",
+    "patio": "Patio / Terrace",
+    "clear_filters": "Clear all filters",
+    "apply_filters": "Apply Filters"
+  },
+  "property": {
+    "features": "Property Features",
+    "square_meters": "Square Meters",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "garage": "Garage",
+    "about": "About this home",
+    "read_more": "Read more",
+    "view_photos": "View All Photos",
+    "premium": "Premium",
+    "amenities": "Amenities",
+    "top_agent": "Top Rated Agent",
+    "schedule_visit": "Schedule Visit",
+    "contact_agent": "Contact Agent",
+    "estimated_payment": "Estimated Payment",
+    "starting_from": "Starting from",
+    "per_month": "/mo",
+    "with_down": "with 20% down",
+    "view_on_map": "View on Map",
+    "calculate_mortgage": "Calculate Mortgage",
+    "not_found": "Property Not Found"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch"
+  },
+  "pagination": {
+    "previous": "Previous page",
+    "next": "Next page"
+  }
+}

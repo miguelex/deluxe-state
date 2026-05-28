@@ -1,6 +1,22 @@
 import Link from "next/link";
+import LanguageSelector from "@/components/layout/LanguageSelector";
+import { getLocale } from "@/lib/getLocale";
+import { getTranslations } from "@/lib/i18n";
 
-export default function Navbar() {
+export default async function Navbar() {
+    const locale = await getLocale();
+    const translations = getTranslations(locale);
+    const t = (key: string): string => {
+        const keys = key.split(".");
+        let current: unknown = translations;
+        for (const k of keys) {
+            if (typeof current === "object" && current !== null && k in (current as object)) {
+                current = (current as Record<string, unknown>)[k];
+            } else return key;
+        }
+        return typeof current === "string" ? current : key;
+    };
+
     return (
         <nav className="sticky top-0 z-50 bg-background-light/95 backdrop-blur-md border-b border-nordic-dark/10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,17 +31,19 @@ export default function Navbar() {
                     </Link>
                     <div className="hidden md:flex items-center space-x-8">
                         <a className="text-mosque font-medium text-sm border-b-2 border-mosque px-1 py-1" href="#">
-                            Buy
+                            {t("nav.buy")}
                         </a>
                         <a className="text-nordic-dark/70 hover:text-nordic-dark font-medium text-sm hover:border-b-2 hover:border-nordic-dark/20 px-1 py-1 transition-all" href="#">
-                            Rent
+                            {t("nav.rent")}
                         </a>
                         <a className="text-nordic-dark/70 hover:text-nordic-dark font-medium text-sm hover:border-b-2 hover:border-nordic-dark/20 px-1 py-1 transition-all" href="#">
-                            Sell
+                            {t("nav.sell")}
                         </a>
-
                     </div>
-                    <div className="flex items-center space-x-6">
+                    <div className="flex items-center space-x-3">
+                        {/* Language Selector */}
+                        <LanguageSelector />
+
                         <button className="text-nordic-dark hover:text-mosque transition-colors">
                             <span className="material-icons">search</span>
                         </button>
@@ -47,10 +65,9 @@ export default function Navbar() {
             </div>
             <div className="md:hidden border-t border-nordic-dark/5 bg-background-light overflow-hidden h-0 transition-all duration-300">
                 <div className="px-4 py-2 space-y-1">
-                    <a className="block px-3 py-2 rounded-md text-base font-medium text-mosque bg-mosque/10" href="#">Buy</a>
-                    <a className="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="#">Rent</a>
-                    <a className="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="#">Sell</a>
-
+                    <a className="block px-3 py-2 rounded-md text-base font-medium text-mosque bg-mosque/10" href="#">{t("nav.buy")}</a>
+                    <a className="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="#">{t("nav.rent")}</a>
+                    <a className="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="#">{t("nav.sell")}</a>
                 </div>
             </div>
         </nav>

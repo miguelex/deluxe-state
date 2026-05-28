@@ -1,0 +1,97 @@
+{
+  "nav": {
+    "buy": "Kaufen",
+    "rent": "Mieten",
+    "sell": "Verkaufen"
+  },
+  "hero": {
+    "title_find": "Finden Sie Ihr",
+    "title_sanctuary": "Refugium",
+    "search_placeholder": "Nach Stadt, Viertel oder Adresse suchen...",
+    "search_button": "Suchen",
+    "filter_all": "Alle",
+    "filter_house": "Haus",
+    "filter_apartment": "Wohnung",
+    "filter_villa": "Villa",
+    "filter_penthouse": "Penthouse",
+    "filters": "Filter"
+  },
+  "featured": {
+    "title": "Ausgewählte Kollektionen",
+    "subtitle": "Kuratierte Immobilien für anspruchsvolle Augen.",
+    "view_all": "Alle anzeigen",
+    "beds": "Schlafzimmer",
+    "baths": "Bäder"
+  },
+  "market": {
+    "title": "Neu am Markt",
+    "subtitle": "Frische Gelegenheiten diese Woche hinzugefügt.",
+    "all": "Alle",
+    "buy": "Kaufen",
+    "rent": "Mieten",
+    "for_sale": "ZU VERKAUFEN",
+    "for_rent": "ZU VERMIETEN"
+  },
+  "modal": {
+    "title": "Filter",
+    "location": "Standort",
+    "location_placeholder": "Stadt, Viertel oder Adresse",
+    "price_range": "Preisspanne",
+    "min_price": "Mindestpreis",
+    "max_price": "Höchstpreis",
+    "no_min": "Kein Min",
+    "no_max": "Kein Max",
+    "property_type": "Immobilientyp",
+    "any_type": "Beliebig",
+    "house": "Haus",
+    "apartment": "Wohnung",
+    "condo": "Eigentumswohnung",
+    "townhouse": "Stadthaus",
+    "villa": "Villa",
+    "penthouse": "Penthouse",
+    "bedrooms": "Schlafzimmer",
+    "bathrooms": "Badezimmer",
+    "any": "Beliebig",
+    "amenities": "Ausstattung & Merkmale",
+    "swimming_pool": "Swimmingpool",
+    "gym": "Fitnessstudio",
+    "parking": "Parken",
+    "air_conditioning": "Klimaanlage",
+    "wifi": "Schnelles WLAN",
+    "patio": "Terrasse / Balkon",
+    "clear_filters": "Alle Filter löschen",
+    "apply_filters": "Filter anwenden"
+  },
+  "property": {
+    "features": "Immobilienmerkmale",
+    "square_meters": "Quadratmeter",
+    "bedrooms": "Schlafzimmer",
+    "bathrooms": "Badezimmer",
+    "garage": "Garage",
+    "about": "Über dieses Haus",
+    "read_more": "Mehr lesen",
+    "view_photos": "Alle Fotos ansehen",
+    "premium": "Premium",
+    "amenities": "Ausstattung",
+    "top_agent": "Bestbewerteter Makler",
+    "schedule_visit": "Besichtigung planen",
+    "contact_agent": "Makler kontaktieren",
+    "estimated_payment": "Geschätzte Zahlung",
+    "starting_from": "Ab",
+    "per_month": "/Monat",
+    "with_down": "mit 20% Anzahlung",
+    "view_on_map": "Auf Karte ansehen",
+    "calculate_mortgage": "Hypothek berechnen",
+    "not_found": "Immobilie nicht gefunden"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch"
+  },
+  "pagination": {
+    "previous": "Vorherige Seite",
+    "next": "Nächste Seite"
+  }
+}

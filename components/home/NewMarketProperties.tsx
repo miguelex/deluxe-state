@@ -1,6 +1,8 @@
 import { Property } from "@/lib/getProperties";
 import Link from "next/link";
 import Pagination from "@/components/ui/Pagination";
+import { getLocale } from "@/lib/getLocale";
+import { getTranslations, resolvePath } from "@/lib/i18n";
 
 interface NewMarketPropertiesProps {
     properties: Property[];
@@ -8,22 +10,26 @@ interface NewMarketPropertiesProps {
     totalPages: number;
 }
 
-export default function NewMarketProperties({
+export default async function NewMarketProperties({
     properties,
     currentPage,
     totalPages,
 }: NewMarketPropertiesProps) {
+    const locale = await getLocale();
+    const translations = getTranslations(locale);
+    const t = (key: string) => resolvePath(translations, key);
+
     return (
         <section>
             <div className="flex items-end justify-between mb-8">
                 <div>
-                    <h2 className="text-2xl font-light text-nordic-dark">New in Market</h2>
-                    <p className="text-nordic-muted mt-1 text-sm">Fresh opportunities added this week.</p>
+                    <h2 className="text-2xl font-light text-nordic-dark">{t("market.title")}</h2>
+                    <p className="text-nordic-muted mt-1 text-sm">{t("market.subtitle")}</p>
                 </div>
                 <div className="hidden md:flex bg-white p-1 rounded-lg">
-                    <button className="px-4 py-1.5 rounded-md text-sm font-medium bg-nordic-dark text-white shadow-sm">All</button>
-                    <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark">Buy</button>
-                    <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark">Rent</button>
+                    <button className="px-4 py-1.5 rounded-md text-sm font-medium bg-nordic-dark text-white shadow-sm">{t("market.all")}</button>
+                    <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark">{t("market.buy")}</button>
+                    <button className="px-4 py-1.5 rounded-md text-sm font-medium text-nordic-muted hover:text-nordic-dark">{t("market.rent")}</button>
                 </div>
             </div>
 
@@ -47,7 +53,7 @@ export default function NewMarketProperties({
                                 className={`absolute bottom-3 left-3 text-white text-xs font-bold px-2 py-1 rounded ${property.type === "SALE" ? "bg-nordic-dark/90" : "bg-mosque/90"
                                     }`}
                             >
-                                {property.type === "SALE" ? "FOR SALE" : "FOR RENT"}
+                                {property.type === "SALE" ? t("market.for_sale") : t("market.for_rent")}
                             </div>
                         </div>
                         <div className="p-4 flex flex-col flex-grow">

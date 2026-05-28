@@ -1,16 +1,22 @@
 import { Property } from "@/lib/getProperties";
 import Link from "next/link";
+import { getLocale } from "@/lib/getLocale";
+import { getTranslations, resolvePath } from "@/lib/i18n";
 
-export default function FeaturedCollections({ properties }: { properties: Property[] }) {
+export default async function FeaturedCollections({ properties }: { properties: Property[] }) {
+    const locale = await getLocale();
+    const translations = getTranslations(locale);
+    const t = (key: string) => resolvePath(translations, key);
+
     return (
         <section className="mb-16">
             <div className="flex items-end justify-between mb-8">
                 <div>
-                    <h2 className="text-2xl font-light text-nordic-dark">Featured Collections</h2>
-                    <p className="text-nordic-muted mt-1 text-sm">Curated properties for the discerning eye.</p>
+                    <h2 className="text-2xl font-light text-nordic-dark">{t("featured.title")}</h2>
+                    <p className="text-nordic-muted mt-1 text-sm">{t("featured.subtitle")}</p>
                 </div>
                 <a className="hidden sm:flex items-center gap-1 text-sm font-medium text-mosque hover:opacity-70 transition-opacity" href="#">
-                    View all <span className="material-icons text-sm">arrow_forward</span>
+                    {t("featured.view_all")} <span className="material-icons text-sm">arrow_forward</span>
                 </a>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -48,10 +54,10 @@ export default function FeaturedCollections({ properties }: { properties: Proper
                             </div>
                             <div className="flex items-center gap-6 mt-6 pt-6 border-t border-nordic-dark/5">
                                 <div className="flex items-center gap-2 text-nordic-muted text-sm">
-                                    <span className="material-icons text-lg">king_bed</span> {property.bedrooms} Beds
+                                    <span className="material-icons text-lg">king_bed</span> {property.bedrooms} {t("featured.beds")}
                                 </div>
                                 <div className="flex items-center gap-2 text-nordic-muted text-sm">
-                                    <span className="material-icons text-lg">bathtub</span> {property.bathrooms} Baths
+                                    <span className="material-icons text-lg">bathtub</span> {property.bathrooms} {t("featured.baths")}
                                 </div>
                                 <div className="flex items-center gap-2 text-nordic-muted text-sm">
                                     <span className="material-icons text-lg">square_foot</span> {property.area.toLocaleString()} m²
