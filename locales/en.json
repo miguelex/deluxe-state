@@ -2,7 +2,9 @@
   "nav": {
     "buy": "Buy",
     "rent": "Rent",
-    "sell": "Sell"
+    "sell": "Sell",
+    "login": "Log in",
+    "logout": "Log out"
   },
   "hero": {
     "title_find": "Find your",

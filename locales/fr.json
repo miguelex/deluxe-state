@@ -2,7 +2,9 @@
   "nav": {
     "buy": "Acheter",
     "rent": "Louer",
-    "sell": "Vendre"
+    "sell": "Vendre",
+    "login": "Se connecter",
+    "logout": "Se déconnecter"
   },
   "hero": {
     "title_find": "Trouvez votre",

@@ -3,6 +3,7 @@ import LanguageSelector from "@/components/layout/LanguageSelector";
 import { getLocale } from "@/lib/getLocale";
 import { getTranslations } from "@/lib/i18n";
 import { createClient } from "@/lib/supabase/server";
+import { signOut } from "@/app/actions/auth";
 
 export default async function Navbar() {
     const locale = await getLocale();
@@ -56,20 +57,27 @@ export default async function Navbar() {
                             <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-background-light"></span>
                         </button>
                         
-                        <div className="pl-2 border-l border-nordic-dark/10 ml-2 flex items-center">
+                        <div className="pl-2 border-l border-nordic-dark/10 ml-2 flex items-center gap-3">
                             {user ? (
-                                <button className="flex items-center gap-2">
-                                    <div className="w-9 h-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-transparent hover:ring-mosque transition-all">
-                                        <img
-                                            alt={user.user_metadata.full_name || "Profile"}
-                                            className="w-full h-full object-cover"
-                                            src={user.user_metadata.avatar_url || `https://ui-avatars.com/api/?name=${user.email}&background=random`}
-                                        />
+                                <>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-9 h-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-transparent hover:ring-mosque transition-all">
+                                            <img
+                                                alt={user.user_metadata.full_name || "Profile"}
+                                                className="w-full h-full object-cover"
+                                                src={user.user_metadata.avatar_url || `https://ui-avatars.com/api/?name=${user.email}&background=random`}
+                                            />
+                                        </div>
                                     </div>
-                                </button>
+                                    <form action={signOut}>
+                                        <button type="submit" className="text-sm font-medium text-nordic-dark hover:text-mosque transition-colors px-3 py-2 rounded-md hover:bg-black/5">
+                                            {t("nav.logout")}
+                                        </button>
+                                    </form>
+                                </>
                             ) : (
                                 <Link href="/login" className="text-sm font-medium text-nordic-dark hover:text-mosque transition-colors px-3 py-2 rounded-md hover:bg-black/5">
-                                    Log in
+                                    {t("nav.login")}
                                 </Link>
                             )}
                         </div>

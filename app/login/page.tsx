@@ -18,9 +18,9 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="font-display bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center p-4 antialiased text-nordic-dark dark:text-gray-100 relative overflow-hidden">
+        <div className="font-display bg-background-light min-h-screen flex items-center justify-center p-4 antialiased text-nordic-dark relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none opacity-40">
-                <div className="absolute -top-24 -right-24 w-96 h-96 bg-hint-of-green/30 rounded-full blur-3xl dark:bg-mosque/10"></div>
+                <div className="absolute -top-24 -right-24 w-96 h-96 bg-hint-of-green/30 rounded-full blur-3xl"></div>
                 <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-mosque/10 rounded-full blur-3xl"></div>
             </div>
             
@@ -29,16 +29,16 @@ export default function LoginPage() {
                     <div className="inline-flex items-center justify-center w-14 h-14 bg-mosque rounded-xl mb-6 shadow-soft text-white">
                         <span className="material-icons text-3xl">real_estate_agent</span>
                     </div>
-                    <h1 className="text-3xl font-bold tracking-tight text-nordic-dark dark:text-white mb-2">Welcome to LuxeEstate</h1>
-                    <p className="text-nordic-dark/60 dark:text-gray-400">Unlock exclusive properties worldwide.</p>
+                    <h1 className="text-3xl font-bold tracking-tight text-nordic-dark mb-2">Welcome to LuxeEstate</h1>
+                    <p className="text-nordic-dark/60">Unlock exclusive properties worldwide.</p>
                 </div>
                 
-                <div className="bg-white dark:bg-[#152e2a] rounded-2xl shadow-soft p-8 sm:p-10 border border-white/50 dark:border-mosque/20 backdrop-blur-sm relative z-10">
+                <div className="bg-white rounded-2xl shadow-soft p-8 sm:p-10 border border-white/50 backdrop-blur-sm relative z-10">
                     <div className="space-y-4">
                         <button 
                             onClick={() => handleLogin('google')}
                             disabled={isLoading !== null}
-                            className="group w-full flex items-center justify-center gap-3 bg-white dark:bg-[#1a3833] border border-gray-100 dark:border-mosque/30 rounded-lg p-3.5 text-nordic-dark dark:text-white font-medium transition-all duration-300 hover:shadow-soft hover:-translate-y-0.5 relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="group w-full flex items-center justify-center gap-3 bg-white border border-gray-100 rounded-lg p-3.5 text-nordic-dark font-medium transition-all duration-300 hover:shadow-soft hover:-translate-y-0.5 relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             <div className="absolute inset-0 bg-hint-of-green/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
                             {isLoading === 'google' ? (
@@ -57,13 +57,13 @@ export default function LoginPage() {
                         <button 
                             onClick={() => handleLogin('github')}
                             disabled={isLoading !== null}
-                            className="group w-full flex items-center justify-center gap-3 bg-white dark:bg-[#1a3833] border border-gray-100 dark:border-mosque/30 rounded-lg p-3.5 text-nordic-dark dark:text-white font-medium transition-all duration-300 hover:shadow-soft hover:-translate-y-0.5 relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="group w-full flex items-center justify-center gap-3 bg-white border border-gray-100 rounded-lg p-3.5 text-nordic-dark font-medium transition-all duration-300 hover:shadow-soft hover:-translate-y-0.5 relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             <div className="absolute inset-0 bg-hint-of-green/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
                             {isLoading === 'github' ? (
-                                <span className="material-symbols-outlined animate-spin relative z-10 text-nordic-dark dark:text-white">progress_activity</span>
+                                <span className="material-symbols-outlined animate-spin relative z-10 text-nordic-dark">progress_activity</span>
                             ) : (
-                                <svg className="w-5 h-5 relative z-10 fill-current text-nordic-dark dark:text-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg className="w-5 h-5 relative z-10 fill-current text-nordic-dark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.419-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
                                 </svg>
                             )}
@@ -71,17 +71,17 @@ export default function LoginPage() {
                         </button>
                     </div>
                     
-                    <p className="mt-8 text-center text-sm text-nordic-dark/70 dark:text-gray-400">
+                    <p className="mt-8 text-center text-sm text-nordic-dark/70">
                         Don't have an account?{" "}
                         <a className="font-semibold text-mosque hover:text-mosque/80 transition-colors" href="#">Sign up</a>
                     </p>
                 </div>
                 
                 <div className="mt-8 text-center relative z-10">
-                    <nav className="flex justify-center gap-6 text-xs text-nordic-dark/50 dark:text-gray-500">
-                        <a className="hover:text-nordic-dark dark:hover:text-gray-300 transition-colors" href="#">Privacy Policy</a>
-                        <a className="hover:text-nordic-dark dark:hover:text-gray-300 transition-colors" href="#">Terms of Service</a>
-                        <a className="hover:text-nordic-dark dark:hover:text-gray-300 transition-colors" href="#">Help Center</a>
+                    <nav className="flex justify-center gap-6 text-xs text-nordic-dark/50">
+                        <a className="hover:text-nordic-dark transition-colors" href="#">Privacy Policy</a>
+                        <a className="hover:text-nordic-dark transition-colors" href="#">Terms of Service</a>
+                        <a className="hover:text-nordic-dark transition-colors" href="#">Help Center</a>
                     </nav>
                 </div>
             </main>
