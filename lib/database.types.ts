@@ -42,6 +42,7 @@ export type Database = {
           id: string
           image_alt: string
           images: string[]
+          is_active: boolean
           is_featured: boolean
           latitude: number | null
           location: string
@@ -62,6 +63,7 @@ export type Database = {
           id?: string
           image_alt: string
           images: string[]
+          is_active?: boolean
           is_featured?: boolean
           latitude?: number | null
           location: string
@@ -82,6 +84,7 @@ export type Database = {
           id?: string
           image_alt?: string
           images?: string[]
+          is_active?: boolean
           is_featured?: boolean
           latitude?: number | null
           location?: string

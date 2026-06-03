@@ -68,7 +68,7 @@ export async function updateProperty(id: string, formData: Record<string, unknow
   return { success: true, property: data }
 }
 
-export async function deleteProperty(id: string) {
+export async function togglePropertyStatus(id: string, currentStatus: boolean) {
   const supabase = await createClient()
 
   // Verify the current user is admin
@@ -87,7 +87,7 @@ export async function deleteProperty(id: string) {
 
   const { error } = await supabase
     .from('properties')
-    .delete()
+    .update({ is_active: !currentStatus })
     .eq('id', id)
 
   if (error) {
@@ -95,5 +95,6 @@ export async function deleteProperty(id: string) {
   }
 
   revalidatePath('/admin/properties')
+  revalidatePath('/(home)') // home page cache might need revalidation
   return { success: true }
 }

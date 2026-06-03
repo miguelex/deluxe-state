@@ -5,6 +5,7 @@ import Image from 'next/image'
 import PropertyPagination from './PropertyPagination'
 import PropertyFilters from './PropertyFilters'
 import Link from 'next/link'
+import { togglePropertyStatus } from './actions'
 
 const PROPERTIES_PER_PAGE = 10
 
@@ -285,6 +286,20 @@ export default async function AdminPropertiesPage({
                   />
                   {property.type === 'SALE' ? t('admin.properties.for_sale') : t('admin.properties.for_rent')}
                 </span>
+                <span
+                  className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ml-2 ${
+                    property.is_active !== false
+                      ? 'bg-green-100 text-green-700 border-green-200'
+                      : 'bg-gray-100 text-gray-700 border-gray-200'
+                  }`}
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full mr-1.5 ${
+                      property.is_active !== false ? 'bg-green-500' : 'bg-gray-500'
+                    }`}
+                  />
+                  {property.is_active !== false ? 'Active' : 'Inactive'}
+                </span>
               </div>
 
               {/* Actions */}
@@ -296,12 +311,24 @@ export default async function AdminPropertiesPage({
                 >
                   <span className="material-icons text-xl">edit</span>
                 </Link>
-                <button
-                  className="p-2 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-all"
-                  title="Delete"
-                >
-                  <span className="material-icons text-xl">delete_outline</span>
-                </button>
+                <form action={async () => {
+                  'use server'
+                  await togglePropertyStatus(property.id, property.is_active ?? true)
+                }}>
+                  <button
+                    type="submit"
+                    className={`p-2 rounded-lg transition-all ${
+                      property.is_active !== false 
+                        ? 'text-gray-400 hover:text-red-600 hover:bg-red-50'
+                        : 'text-gray-400 hover:text-green-600 hover:bg-green-50'
+                    }`}
+                    title={property.is_active !== false ? 'Deactivate' : 'Activate'}
+                  >
+                    <span className="material-icons text-xl">
+                      {property.is_active !== false ? 'visibility_off' : 'visibility'}
+                    </span>
+                  </button>
+                </form>
               </div>
             </div>
           )

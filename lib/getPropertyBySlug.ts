@@ -6,6 +6,7 @@ export async function getPropertyBySlug(slug: string): Promise<Property | null> 
         .from("properties")
         .select("*")
         .eq("slug", slug)
+        .eq("is_active", true)
         .single();
 
     if (propertyError || !property) {

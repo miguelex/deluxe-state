@@ -13,6 +13,7 @@ export interface Property {
     image_alt: string;
     tags: string[];
     type: "SALE" | "RENT";
+    is_active: boolean;
     is_featured: boolean;
     created_at: string;
     slug: string;
@@ -35,6 +36,7 @@ export async function getFeaturedProperties(): Promise<Property[]> {
     const { data, error } = await supabase
         .from("properties")
         .select("*")
+        .eq("is_active", true)
         .eq("is_featured", true);
 
     if (error) {
@@ -73,6 +75,7 @@ export async function getMarketProperties(
     let query = supabase
         .from("properties")
         .select("*", { count: "exact" })
+        .eq("is_active", true)
         .eq("is_featured", false)
         .order("created_at", { ascending: false });
 
