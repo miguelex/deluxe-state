@@ -43,3 +43,10 @@ next-env.d.ts
 
 *.mjs
 *.sql
+check_urls.mjs
+cleanup.mjs
+seed.mjs
+seed.sql
+seed2.mjs
+setup_bucket.mjs
+strip.mjs
