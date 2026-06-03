@@ -3,7 +3,12 @@
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 
-export default function UserSearch({ defaultValue }: { defaultValue: string }) {
+interface UserSearchProps {
+  defaultValue: string
+  placeholder: string
+}
+
+export default function UserSearch({ defaultValue, placeholder }: UserSearchProps) {
   const [search, setSearch] = useState(defaultValue)
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
@@ -31,7 +36,7 @@ export default function UserSearch({ defaultValue }: { defaultValue: string }) {
         value={search}
         onChange={(e) => handleSearch(e.target.value)}
         className="block w-full pl-10 pr-3 py-2.5 border-none rounded-lg bg-white text-[#19322F] shadow-[0_4px_20px_-2px_rgba(25,50,47,0.05)] placeholder-[#19322F]/30 focus:ring-2 focus:ring-[#006655] focus:bg-white transition-all text-sm"
-        placeholder="Search by name, email..."
+        placeholder={placeholder}
       />
     </div>
   )

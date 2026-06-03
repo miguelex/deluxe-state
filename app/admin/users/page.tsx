@@ -1,4 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
+import { getLocale } from '@/lib/getLocale'
+import { getTranslations, resolvePath } from '@/lib/i18n'
 import RoleSelector from './RoleSelector'
 import UserSearch from './UserSearch'
 import UserPagination from './UserPagination'
@@ -14,6 +16,10 @@ export default async function AdminUsersPage({
   const currentPage = Math.max(1, parseInt(params.page || '1', 10))
   const searchQuery = params.search || ''
   const activeTab = params.tab || 'all'
+
+  const locale = await getLocale()
+  const translations = getTranslations(locale)
+  const t = (key: string) => resolvePath(translations, key)
 
   const supabase = await createClient()
 
@@ -73,10 +79,28 @@ export default async function AdminUsersPage({
   const totalRegularUsers = totalAll - totalAdmins
 
   const tabs = [
-    { id: 'all', label: 'All Users', count: totalAll },
-    { id: 'users', label: 'Users', count: totalRegularUsers },
-    { id: 'admins', label: 'Admins', count: totalAdmins },
+    { id: 'all', label: t('admin.users.tab_all'), count: totalAll },
+    { id: 'users', label: t('admin.users.tab_users'), count: totalRegularUsers },
+    { id: 'admins', label: t('admin.users.tab_admins'), count: totalAdmins },
   ]
+
+  // Translations for client components
+  const roleSelectorT = {
+    change_role: t('admin.users.change_role'),
+    updating: t('admin.users.updating'),
+    role_admin: t('admin.users.role_admin'),
+    role_user: t('admin.users.role_user'),
+    suspend_user: t('admin.users.suspend_user'),
+  }
+
+  const paginationT = {
+    showing: t('admin.users.showing'),
+    to: t('admin.users.to'),
+    of: t('admin.users.of'),
+    users_label: t('admin.users.users_label'),
+    previous: t('admin.users.previous'),
+    next: t('admin.users.next'),
+  }
 
   return (
     <div className="space-y-0">
@@ -85,17 +109,20 @@ export default async function AdminUsersPage({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-[#19322F]">
-              User Directory
+              {t('admin.users.title')}
             </h1>
             <p className="text-[#19322F]/60 mt-1 text-sm">
-              Manage user access and roles for your properties.
+              {t('admin.users.subtitle')}
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-            <UserSearch defaultValue={searchQuery} />
-            <button className="inline-flex items-center justify-center px-4 py-2.5 border border-[#006655] text-sm font-medium rounded-lg text-[#006655] bg-transparent hover:bg-[#006655]/5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#006655] transition-colors whitespace-nowrap">
-              <span className="material-icons text-lg mr-2">add</span>
-              Add User
+            <UserSearch
+              defaultValue={searchQuery}
+              placeholder={t('admin.users.search_placeholder')}
+            />
+            <button className="bg-[#006655] hover:bg-[#006655]/90 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-md shadow-[#006655]/20 transition-all transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 whitespace-nowrap">
+              <span className="material-icons text-base">add</span>
+              {t('admin.users.add_user')}
             </button>
           </div>
         </div>
@@ -121,10 +148,10 @@ export default async function AdminUsersPage({
 
       {/* Column Headers */}
       <div className="hidden md:grid grid-cols-12 gap-4 px-6 text-xs font-semibold uppercase tracking-wider text-[#19322F]/50 mb-2 mt-2">
-        <div className="col-span-5">User Details</div>
-        <div className="col-span-3">Role & Status</div>
-        <div className="col-span-2">Joined</div>
-        <div className="col-span-2 text-right">Actions</div>
+        <div className="col-span-5">{t('admin.users.user_details')}</div>
+        <div className="col-span-3">{t('admin.users.role_status')}</div>
+        <div className="col-span-2">{t('admin.users.joined')}</div>
+        <div className="col-span-2 text-right">{t('admin.users.actions')}</div>
       </div>
 
       {/* User Cards */}
@@ -137,7 +164,7 @@ export default async function AdminUsersPage({
           const isAdmin = role === 'admin'
           const initial = u.email?.[0]?.toUpperCase() || '?'
           const userId = `USR-${u.id.substring(0, 4).toUpperCase()}`
-          const joinedDate = new Date(u.created_at).toLocaleDateString('en-US', {
+          const joinedDate = new Date(u.created_at).toLocaleDateString(locale, {
             year: 'numeric',
             month: 'short',
             day: 'numeric',
@@ -171,7 +198,7 @@ export default async function AdminUsersPage({
                 </div>
                 <div className="ml-4 overflow-hidden">
                   <div className="text-sm font-bold text-[#19322F] truncate">
-                    {u.email?.split('@')[0] || 'Unknown'}
+                    {u.email?.split('@')[0] || t('admin.users.unknown')}
                   </div>
                   <div className="text-xs text-[#19322F]/60 truncate">
                     {u.email}
@@ -191,7 +218,7 @@ export default async function AdminUsersPage({
                     ? 'bg-[#19322F] text-white'
                     : 'bg-gray-100 text-gray-600'
                 }`}>
-                  {isAdmin ? 'Administrator' : 'User'}
+                  {isAdmin ? t('admin.users.role_admin') : t('admin.users.role_user')}
                 </span>
                 <div className="flex items-center text-xs text-[#19322F]/60">
                   <span className={`material-icons text-[14px] mr-1 ${
@@ -199,19 +226,19 @@ export default async function AdminUsersPage({
                   }`}>
                     {isAdmin ? 'check_circle' : 'schedule'}
                   </span>
-                  {isAdmin ? 'Active' : 'Active'}
+                  {t('admin.users.active')}
                 </div>
               </div>
 
               {/* Joined Date */}
               <div className="col-span-12 md:col-span-2 w-full">
-                <div className="text-[10px] uppercase tracking-wider text-[#19322F]/40">Joined</div>
+                <div className="text-[10px] uppercase tracking-wider text-[#19322F]/40">{t('admin.users.joined')}</div>
                 <div className="text-sm font-semibold text-[#19322F]">{joinedDate}</div>
               </div>
 
               {/* Actions */}
               <div className="col-span-12 md:col-span-2 w-full flex justify-end">
-                <RoleSelector userId={u.id} currentRole={role} />
+                <RoleSelector userId={u.id} currentRole={role} t={roleSelectorT} />
               </div>
             </div>
           )
@@ -220,7 +247,7 @@ export default async function AdminUsersPage({
         {(!users || users.length === 0) && (
           <div className="bg-white rounded-xl border border-gray-100 p-12 text-center">
             <span className="material-icons text-4xl text-[#19322F]/20 mb-3 block">person_off</span>
-            <p className="text-[#19322F]/50 text-sm">No users found.</p>
+            <p className="text-[#19322F]/50 text-sm">{t('admin.users.no_users')}</p>
           </div>
         )}
       </div>
@@ -234,6 +261,7 @@ export default async function AdminUsersPage({
           usersPerPage={USERS_PER_PAGE}
           searchQuery={searchQuery}
           activeTab={activeTab}
+          t={paginationT}
         />
       )}
     </div>

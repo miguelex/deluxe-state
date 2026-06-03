@@ -1,5 +1,14 @@
 import Link from 'next/link'
 
+interface PaginationTranslations {
+  showing: string
+  to: string
+  of: string
+  users_label: string
+  previous: string
+  next: string
+}
+
 interface UserPaginationProps {
   currentPage: number
   totalPages: number
@@ -7,6 +16,7 @@ interface UserPaginationProps {
   usersPerPage: number
   searchQuery: string
   activeTab: string
+  t: PaginationTranslations
 }
 
 export default function UserPagination({
@@ -16,6 +26,7 @@ export default function UserPagination({
   usersPerPage,
   searchQuery,
   activeTab,
+  t,
 }: UserPaginationProps) {
   const startItem = (currentPage - 1) * usersPerPage + 1
   const endItem = Math.min(currentPage * usersPerPage, totalUsers)
@@ -49,9 +60,9 @@ export default function UserPagination({
         <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
           <div>
             <p className="text-sm text-[#19322F]/60">
-              Showing <span className="font-medium text-[#19322F]">{startItem}</span> to{' '}
-              <span className="font-medium text-[#19322F]">{endItem}</span> of{' '}
-              <span className="font-medium text-[#19322F]">{totalUsers}</span> users
+              {t.showing} <span className="font-medium text-[#19322F]">{startItem}</span> {t.to}{' '}
+              <span className="font-medium text-[#19322F]">{endItem}</span> {t.of}{' '}
+              <span className="font-medium text-[#19322F]">{totalUsers}</span> {t.users_label}
             </p>
           </div>
           <div>
@@ -61,7 +72,7 @@ export default function UserPagination({
                   href={buildHref(currentPage - 1)}
                   className="relative inline-flex items-center px-2 py-2 rounded-l-md text-sm font-medium text-[#19322F]/50 hover:text-[#006655] transition-colors"
                 >
-                  <span className="sr-only">Previous</span>
+                  <span className="sr-only">{t.previous}</span>
                   <span className="material-icons text-xl">chevron_left</span>
                 </Link>
               ) : (
@@ -102,7 +113,7 @@ export default function UserPagination({
                   href={buildHref(currentPage + 1)}
                   className="relative inline-flex items-center px-2 py-2 rounded-r-md text-sm font-medium text-[#19322F]/50 hover:text-[#006655] transition-colors"
                 >
-                  <span className="sr-only">Next</span>
+                  <span className="sr-only">{t.next}</span>
                   <span className="material-icons text-xl">chevron_right</span>
                 </Link>
               ) : (
@@ -121,11 +132,11 @@ export default function UserPagination({
               href={buildHref(currentPage - 1)}
               className="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-[#19322F] bg-white border border-gray-300 hover:bg-gray-50"
             >
-              Previous
+              {t.previous}
             </Link>
           ) : (
             <span className="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-[#19322F]/30 bg-white border border-gray-200 cursor-not-allowed">
-              Previous
+              {t.previous}
             </span>
           )}
           {currentPage < totalPages ? (
@@ -133,11 +144,11 @@ export default function UserPagination({
               href={buildHref(currentPage + 1)}
               className="ml-3 relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-[#19322F] bg-white border border-gray-300 hover:bg-gray-50"
             >
-              Next
+              {t.next}
             </Link>
           ) : (
             <span className="ml-3 relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md text-[#19322F]/30 bg-white border border-gray-200 cursor-not-allowed">
-              Next
+              {t.next}
             </span>
           )}
         </div>

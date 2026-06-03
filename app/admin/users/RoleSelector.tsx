@@ -3,7 +3,21 @@
 import { useState, useRef, useEffect } from 'react'
 import { updateUserRole } from '../actions'
 
-export default function RoleSelector({ userId, currentRole }: { userId: string; currentRole: string }) {
+interface RoleSelectorTranslations {
+  change_role: string
+  updating: string
+  role_admin: string
+  role_user: string
+  suspend_user: string
+}
+
+interface RoleSelectorProps {
+  userId: string
+  currentRole: string
+  t: RoleSelectorTranslations
+}
+
+export default function RoleSelector({ userId, currentRole, t }: RoleSelectorProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isUpdating, setIsUpdating] = useState(false)
   const [role, setRole] = useState(currentRole)
@@ -38,8 +52,8 @@ export default function RoleSelector({ userId, currentRole }: { userId: string; 
   const isAdmin = role === 'admin'
 
   const roles = [
-    { value: 'admin' as const, label: 'Administrator', icon: 'shield' },
-    { value: 'user' as const, label: 'User', icon: 'person' },
+    { value: 'admin' as const, label: t.role_admin, icon: 'shield' },
+    { value: 'user' as const, label: t.role_user, icon: 'person' },
   ]
 
   return (
@@ -55,7 +69,7 @@ export default function RoleSelector({ userId, currentRole }: { userId: string; 
               : 'border border-gray-200 bg-transparent text-[#19322F]/70 hover:border-[#19322F] hover:text-[#19322F] group-hover:bg-white group-hover:shadow-sm'
         }`}
       >
-        {isUpdating ? 'Updating...' : 'Change Role'}
+        {isUpdating ? t.updating : t.change_role}
         <span className="material-icons text-[16px] ml-2">
           {isOpen ? 'expand_less' : 'expand_more'}
         </span>
@@ -92,7 +106,7 @@ export default function RoleSelector({ userId, currentRole }: { userId: string; 
               <span className="material-icons text-sm mr-3 text-red-300 group-hover/item:text-red-100">
                 block
               </span>
-              Suspend User
+              {t.suspend_user}
             </button>
           </div>
         </div>

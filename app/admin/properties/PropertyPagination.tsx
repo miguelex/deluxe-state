@@ -1,10 +1,26 @@
 import Link from 'next/link'
 
+interface PaginationTranslations {
+  showing: string
+  to: string
+  of: string
+  results: string
+  previous: string
+  next: string
+}
+
 interface PropertyPaginationProps {
   currentPage: number
   totalPages: number
   totalProperties: number
   propertiesPerPage: number
+  filters?: {
+    type?: string
+    search?: string
+    minPrice?: string
+    maxPrice?: string
+  }
+  t: PaginationTranslations
 }
 
 export default function PropertyPagination({
@@ -12,6 +28,8 @@ export default function PropertyPagination({
   totalPages,
   totalProperties,
   propertiesPerPage,
+  filters = {},
+  t,
 }: PropertyPaginationProps) {
   const startItem = (currentPage - 1) * propertiesPerPage + 1
   const endItem = Math.min(currentPage * propertiesPerPage, totalProperties)
@@ -19,16 +37,20 @@ export default function PropertyPagination({
   function buildHref(page: number) {
     const params = new URLSearchParams()
     params.set('page', String(page))
+    if (filters.type) params.set('type', filters.type)
+    if (filters.search) params.set('search', filters.search)
+    if (filters.minPrice) params.set('minPrice', filters.minPrice)
+    if (filters.maxPrice) params.set('maxPrice', filters.maxPrice)
     return `/admin/properties?${params.toString()}`
   }
 
   return (
     <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-between bg-gray-50/50">
       <div className="text-sm text-gray-500">
-        Showing{' '}
-        <span className="font-medium text-[#19322F]">{startItem}</span> to{' '}
-        <span className="font-medium text-[#19322F]">{endItem}</span> of{' '}
-        <span className="font-medium text-[#19322F]">{totalProperties}</span> results
+        {t.showing}{' '}
+        <span className="font-medium text-[#19322F]">{startItem}</span> {t.to}{' '}
+        <span className="font-medium text-[#19322F]">{endItem}</span> {t.of}{' '}
+        <span className="font-medium text-[#19322F]">{totalProperties}</span> {t.results}
       </div>
       <div className="flex gap-2">
         {currentPage > 1 ? (
@@ -36,11 +58,11 @@ export default function PropertyPagination({
             href={buildHref(currentPage - 1)}
             className="px-3 py-1 text-sm border border-gray-200 rounded-md text-gray-600 hover:bg-white transition-colors"
           >
-            Previous
+            {t.previous}
           </Link>
         ) : (
           <span className="px-3 py-1 text-sm border border-gray-200 rounded-md text-gray-300 cursor-not-allowed">
-            Previous
+            {t.previous}
           </span>
         )}
         {currentPage < totalPages ? (
@@ -48,11 +70,11 @@ export default function PropertyPagination({
             href={buildHref(currentPage + 1)}
             className="px-3 py-1 text-sm border border-gray-200 rounded-md text-gray-600 hover:bg-white transition-colors"
           >
-            Next
+            {t.next}
           </Link>
         ) : (
           <span className="px-3 py-1 text-sm border border-gray-200 rounded-md text-gray-300 cursor-not-allowed">
-            Next
+            {t.next}
           </span>
         )}
       </div>
