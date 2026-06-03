@@ -31,7 +31,7 @@ export default function PropertyForm({ initialData, t }: PropertyFormProps) {
   const [status, setStatus] = useState(initialData?.type || 'SALE')
   
   // We'll map "Property Type" from HTML to a tag
-  const initialTags = initialData?.tags || []
+  const initialTags = (initialData?.tags as string[]) || []
   const propertyTypes = ['Apartment', 'House', 'Villa', 'Commercial']
   const initialTypeTag = propertyTypes.find(type => initialTags.includes(type)) || 'Apartment'
   const [propertyType, setPropertyType] = useState(initialTypeTag)
@@ -61,7 +61,7 @@ export default function PropertyForm({ initialData, t }: PropertyFormProps) {
   };
 
   const [images, setImages] = useState<ImageState[]>(
-    (initialData?.images || []).map((url: string) => ({ url }))
+    ((initialData?.images as string[]) || []).map((url: string) => ({ url }))
   );
   
   const fileInputRef = useRef<HTMLInputElement>(null)
