@@ -8,7 +8,7 @@ import { createProperty, updateProperty } from '../actions'
 import AdminMap from './AdminMap'
 
 interface PropertyFormProps {
-  initialData?: Record<string, unknown>
+  initialData?: any
   t: Record<string, string>
 }
 
@@ -45,9 +45,9 @@ export default function PropertyForm({ initialData, t }: PropertyFormProps) {
   // The DB doesn't have year_built, we can ignore it or add to tags/metadata
   // Let's add it to tags if it's there
   
-  const [bedrooms, setBedrooms] = useState(initialData?.bedrooms || 0)
-  const [bathrooms, setBathrooms] = useState(initialData?.bathrooms || 0)
-  const [parking, setParking] = useState(initialData?.parking || 0) // Parking doesn't exist in DB as field, we'll store as tag
+  const [bedrooms, setBedrooms] = useState((initialData?.bedrooms as number) || 0)
+  const [bathrooms, setBathrooms] = useState((initialData?.bathrooms as number) || 0)
+  const [parking, setParking] = useState((initialData?.parking as number) || 0) // Parking doesn't exist in DB as field, we'll store as tag
   const [isFeatured, setIsFeatured] = useState(initialData?.is_featured || false)
   
   const amenitiesList = ['Swimming Pool', 'Garden', 'Air Conditioning', 'Smart Home', 'High-speed Wifi', 'Gym', 'Patio / Terrace']
@@ -499,7 +499,7 @@ export default function PropertyForm({ initialData, t }: PropertyFormProps) {
                 </label>
                 <div className="flex items-center border border-gray-200 rounded-md overflow-hidden bg-white shadow-sm">
                   <button onClick={() => setBedrooms(Math.max(0, parseInt(bedrooms.toString()) - 1))} className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors border-r border-gray-100" type="button">-</button>
-                  <input value={bedrooms} onChange={e => setBedrooms(e.target.value)} className="w-10 text-center border-none bg-transparent text-nordic p-0 focus:ring-0 text-sm font-medium font-sf-pro" type="text"/>
+                  <input value={bedrooms} onChange={e => setBedrooms(parseInt(e.target.value) || 0)} className="w-10 text-center border-none bg-transparent text-nordic p-0 focus:ring-0 text-sm font-medium font-sf-pro" type="text"/>
                   <button onClick={() => setBedrooms(parseInt(bedrooms.toString()) + 1)} className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors border-l border-gray-100" type="button">+</button>
                 </div>
               </div>
@@ -511,7 +511,7 @@ export default function PropertyForm({ initialData, t }: PropertyFormProps) {
                 </label>
                 <div className="flex items-center border border-gray-200 rounded-md overflow-hidden bg-white shadow-sm">
                   <button onClick={() => setBathrooms(Math.max(0, parseInt(bathrooms.toString()) - 1))} className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors border-r border-gray-100" type="button">-</button>
-                  <input value={bathrooms} onChange={e => setBathrooms(e.target.value)} className="w-10 text-center border-none bg-transparent text-nordic p-0 focus:ring-0 text-sm font-medium font-sf-pro" type="text"/>
+                  <input value={bathrooms} onChange={e => setBathrooms(parseInt(e.target.value) || 0)} className="w-10 text-center border-none bg-transparent text-nordic p-0 focus:ring-0 text-sm font-medium font-sf-pro" type="text"/>
                   <button onClick={() => setBathrooms(parseInt(bathrooms.toString()) + 1)} className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors border-l border-gray-100" type="button">+</button>
                 </div>
               </div>
@@ -523,7 +523,7 @@ export default function PropertyForm({ initialData, t }: PropertyFormProps) {
                 </label>
                 <div className="flex items-center border border-gray-200 rounded-md overflow-hidden bg-white shadow-sm">
                   <button onClick={() => setParking(Math.max(0, parseInt(parking.toString()) - 1))} className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors border-r border-gray-100" type="button">-</button>
-                  <input value={parking} onChange={e => setParking(e.target.value)} className="w-10 text-center border-none bg-transparent text-nordic p-0 focus:ring-0 text-sm font-medium font-sf-pro" type="text"/>
+                  <input value={parking} onChange={e => setParking(parseInt(e.target.value) || 0)} className="w-10 text-center border-none bg-transparent text-nordic p-0 focus:ring-0 text-sm font-medium font-sf-pro" type="text"/>
                   <button onClick={() => setParking(parseInt(parking.toString()) + 1)} className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors border-l border-gray-100" type="button">+</button>
                 </div>
               </div>
