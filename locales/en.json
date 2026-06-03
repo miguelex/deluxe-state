@@ -190,7 +190,11 @@
       "success_add": "Property added successfully!",
       "success_edit": "Property updated successfully!",
       "error": "An error occurred.",
-      "is_featured": "Featured Property"
+      "is_featured": "Featured Property",
+      "success_title": "Success!",
+      "error_title": "Error",
+      "continue": "Continue",
+      "map_drag_help": "You can drag the marker to adjust the exact location."
     },
     "users": {
       "title": "User Directory",

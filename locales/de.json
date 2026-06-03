@@ -190,7 +190,11 @@
       "success_add": "Immobilie erfolgreich hinzugefügt!",
       "success_edit": "Immobilie erfolgreich aktualisiert!",
       "error": "Ein Fehler ist aufgetreten.",
-      "is_featured": "Hervorgehobene Immobilie"
+      "is_featured": "Hervorgehobene Immobilie",
+      "success_title": "Erfolg!",
+      "error_title": "Fehler",
+      "continue": "Weiter",
+      "map_drag_help": "Sie können die Markierung ziehen, um den genauen Standort anzupassen."
     },
     "users": {
       "title": "Benutzerverzeichnis",

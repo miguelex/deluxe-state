@@ -190,7 +190,11 @@
       "success_add": "¡Propiedad añadida con éxito!",
       "success_edit": "¡Propiedad actualizada con éxito!",
       "error": "Ha ocurrido un error.",
-      "is_featured": "Propiedad Destacada"
+      "is_featured": "Propiedad Destacada",
+      "success_title": "¡Éxito!",
+      "error_title": "Error",
+      "continue": "Continuar",
+      "map_drag_help": "Puedes arrastrar el marcador para ajustar la ubicación exacta."
     },
     "users": {
       "title": "Directorio de Usuarios",

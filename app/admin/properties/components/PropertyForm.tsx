@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { createProperty, updateProperty } from '../actions'
+import AdminMap from './AdminMap'
 
 interface PropertyFormProps {
   initialData?: Record<string, unknown>
@@ -17,6 +18,11 @@ export default function PropertyForm({ initialData, t }: PropertyFormProps) {
   
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [modalState, setModalState] = useState<{isOpen: boolean, type: 'success' | 'error', message: string}>({
+    isOpen: false,
+    type: 'success',
+    message: ''
+  })
   
   // Form State
   const [title, setTitle] = useState(initialData?.title || '')
@@ -149,11 +155,20 @@ export default function PropertyForm({ initialData, t }: PropertyFormProps) {
         if (res.error) throw new Error(res.error)
       }
       
-      router.push('/admin/properties')
-      router.refresh()
+      setModalState({
+        isOpen: true,
+        type: 'success',
+        message: initialData?.id ? (t.success_edit || 'Property updated successfully!') : (t.success_add || 'Property created successfully!')
+      });
     } catch (err: unknown) {
       console.error(err)
-      setError(err instanceof Error ? err.message : t.error)
+      const errorMessage = err instanceof Error ? err.message : (t.error || 'An error occurred');
+      setError(errorMessage)
+      setModalState({
+        isOpen: true,
+        type: 'error',
+        message: errorMessage
+      });
     } finally {
       setIsSubmitting(false)
     }
@@ -433,6 +448,22 @@ export default function PropertyForm({ initialData, t }: PropertyFormProps) {
                 />
               </div>
             </div>
+            
+            {latitude !== '' && longitude !== '' && !isNaN(parseFloat(latitude.toString())) && !isNaN(parseFloat(longitude.toString())) && (
+              <div className="pt-4 fade-in">
+                <AdminMap 
+                  lat={parseFloat(latitude.toString())} 
+                  lng={parseFloat(longitude.toString())} 
+                  onChange={(lat, lng) => {
+                    setLatitude(lat.toFixed(6));
+                    setLongitude(lng.toFixed(6));
+                  }}
+                />
+                <p className="text-xs text-gray-500 mt-2 font-sf-pro">
+                  {t.map_drag_help || "You can drag the marker to adjust the exact location."}
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -583,6 +614,46 @@ export default function PropertyForm({ initialData, t }: PropertyFormProps) {
           )}
         </button>
       </div>
+
+      {/* Success/Error Modal */}
+      {modalState.isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-nordic/40 backdrop-blur-sm fade-in">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden scale-in">
+            <div className={`p-6 flex flex-col items-center text-center ${modalState.type === 'success' ? 'bg-hint-green/10' : 'bg-red-50'}`}>
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${modalState.type === 'success' ? 'bg-hint-green text-nordic' : 'bg-red-100 text-red-600'}`}>
+                <span className="material-icons text-3xl">
+                  {modalState.type === 'success' ? 'check_circle' : 'error'}
+                </span>
+              </div>
+              <h3 className="text-xl font-bold text-nordic mb-2">
+                {modalState.type === 'success' ? (t.success_title || 'Success!') : (t.error_title || 'Error')}
+              </h3>
+              <p className="text-gray-600 font-sf-pro">
+                {modalState.message}
+              </p>
+            </div>
+            <div className="p-4 bg-white border-t border-gray-100 flex justify-center">
+              <button
+                type="button"
+                onClick={() => {
+                  setModalState(prev => ({ ...prev, isOpen: false }));
+                  if (modalState.type === 'success') {
+                    router.push('/admin/properties');
+                    router.refresh();
+                  }
+                }}
+                className={`px-8 py-2.5 rounded-lg font-medium font-sf-pro transition-colors ${
+                  modalState.type === 'success' 
+                    ? 'bg-mosque text-white hover:bg-nordic' 
+                    : 'bg-red-600 text-white hover:bg-red-700'
+                }`}
+              >
+                {t.continue || 'Continue'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </form>
   )

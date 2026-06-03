@@ -48,7 +48,13 @@ export default async function NewPropertyPage() {
     cancel: t('admin.property_form.cancel'),
     saving: t('admin.property_form.saving'),
     save_property: t('admin.property_form.save_property'),
-    error: t('admin.property_form.error')
+    error: t('admin.property_form.error'),
+    success_add: t('admin.property_form.success_add'),
+    success_edit: t('admin.property_form.success_edit'),
+    success_title: t('admin.property_form.success_title'),
+    error_title: t('admin.property_form.error_title'),
+    continue: t('admin.property_form.continue'),
+    map_drag_help: t('admin.property_form.map_drag_help')
   }
 
   return (

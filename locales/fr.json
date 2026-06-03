@@ -190,7 +190,11 @@
       "success_add": "Propriété ajoutée avec succès !",
       "success_edit": "Propriété mise à jour avec succès !",
       "error": "Une erreur est survenue.",
-      "is_featured": "Propriété en Vedette"
+      "is_featured": "Propriété en Vedette",
+      "success_title": "Succès !",
+      "error_title": "Erreur",
+      "continue": "Continuer",
+      "map_drag_help": "Vous pouvez faire glisser le marqueur pour ajuster l'emplacement exact."
     },
     "users": {
       "title": "Répertoire des Utilisateurs",
