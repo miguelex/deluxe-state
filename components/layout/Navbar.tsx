@@ -4,8 +4,14 @@ import { getLocale } from "@/lib/getLocale";
 import { getTranslations } from "@/lib/i18n";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/app/actions/auth";
+import { headers } from "next/headers";
 
 export default async function Navbar() {
+    // Hide on admin pages (admin has its own navbar)
+    const headersList = await headers();
+    const pathname = headersList.get("x-pathname") || headersList.get("x-invoke-path") || "";
+    if (pathname.startsWith("/admin")) return null;
+
     const locale = await getLocale();
     const translations = getTranslations(locale);
     const t = (key: string): string => {

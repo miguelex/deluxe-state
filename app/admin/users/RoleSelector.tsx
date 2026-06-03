@@ -1,30 +1,102 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { updateUserRole } from '../actions'
 
-export default function RoleSelector({ userId, currentRole }: { userId: string, currentRole: string }) {
+export default function RoleSelector({ userId, currentRole }: { userId: string; currentRole: string }) {
+  const [isOpen, setIsOpen] = useState(false)
   const [isUpdating, setIsUpdating] = useState(false)
+  const [role, setRole] = useState(currentRole)
+  const menuRef = useRef<HTMLDivElement>(null)
 
-  const handleRoleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const handleRoleChange = async (newRole: 'user' | 'admin') => {
+    if (newRole === role) {
+      setIsOpen(false)
+      return
+    }
     setIsUpdating(true)
-    const newRole = e.target.value as 'user' | 'admin'
     const result = await updateUserRole(userId, newRole)
     if (result.error) {
       alert(result.error)
+    } else {
+      setRole(newRole)
     }
     setIsUpdating(false)
+    setIsOpen(false)
   }
 
+  const isAdmin = role === 'admin'
+
+  const roles = [
+    { value: 'admin' as const, label: 'Administrator', icon: 'shield' },
+    { value: 'user' as const, label: 'User', icon: 'person' },
+  ]
+
   return (
-    <select
-      value={currentRole}
-      onChange={handleRoleChange}
-      disabled={isUpdating}
-      className="bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 disabled:opacity-50"
-    >
-      <option value="user">User</option>
-      <option value="admin">Admin</option>
-    </select>
+    <div className="relative" ref={menuRef}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        disabled={isUpdating}
+        className={`inline-flex items-center px-4 py-2 text-xs font-medium rounded-lg transition-colors w-full md:w-auto justify-center disabled:opacity-50 ${
+          isOpen
+            ? 'bg-[#006655] text-white shadow-md hover:bg-[#004d40]'
+            : isAdmin
+              ? 'border border-[#19322F]/10 bg-white shadow-sm text-[#19322F] hover:bg-[#19322F] hover:text-white'
+              : 'border border-gray-200 bg-transparent text-[#19322F]/70 hover:border-[#19322F] hover:text-[#19322F] group-hover:bg-white group-hover:shadow-sm'
+        }`}
+      >
+        {isUpdating ? 'Updating...' : 'Change Role'}
+        <span className="material-icons text-[16px] ml-2">
+          {isOpen ? 'expand_less' : 'expand_more'}
+        </span>
+      </button>
+
+      {isOpen && (
+        <div className="absolute top-full right-0 mt-2 w-48 rounded-lg shadow-xl bg-[#006655] ring-1 ring-black/5 overflow-hidden z-50 origin-top-right animate-in fade-in slide-in-from-top-1 duration-200">
+          <div className="py-1" role="menu">
+            {roles.map((r) => (
+              <button
+                key={r.value}
+                onClick={() => handleRoleChange(r.value)}
+                className={`group/item flex items-center w-full px-4 py-3 text-xs transition-colors ${
+                  role === r.value
+                    ? 'text-white bg-white/10 font-medium hover:bg-white/20'
+                    : 'text-white/70 hover:bg-white/10 hover:text-white'
+                }`}
+                role="menuitem"
+              >
+                <span className={`material-icons text-sm mr-3 ${
+                  role === r.value ? 'text-white' : 'text-white/50 group-hover/item:text-white'
+                }`}>
+                  {r.icon}
+                </span>
+                {r.label}
+              </button>
+            ))}
+            <div className="border-t border-white/10 my-1" />
+            <button
+              onClick={() => setIsOpen(false)}
+              className="group/item flex items-center w-full px-4 py-3 text-xs text-red-200 hover:bg-red-500/20 hover:text-red-100 transition-colors"
+              role="menuitem"
+            >
+              <span className="material-icons text-sm mr-3 text-red-300 group-hover/item:text-red-100">
+                block
+              </span>
+              Suspend User
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
