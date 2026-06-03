@@ -81,8 +81,10 @@ export async function getMarketProperties(
 
     if (filters) {
         if (filters.location) {
-            // ILIKE for case-insensitive search
-            query = query.ilike('location', `%${filters.location}%`);
+            // ILIKE for case-insensitive search on both title and location
+            // We wrap the search term in double quotes to safely handle commas in PostgREST
+            const searchTerm = `"%${filters.location}%"`;
+            query = query.or(`title.ilike.${searchTerm},location.ilike.${searchTerm}`);
         }
         if (filters.minPrice) {
             query = query.gte('price', filters.minPrice);
